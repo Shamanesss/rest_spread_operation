@@ -1,23 +1,62 @@
 let listIngredients = document.querySelectorAll('.selectbtn');
 let pedido = document.getElementById('pedido');
 let ingredientes = document.getElementById('ingredientes');
+let selectIng = [];
 
- listIngredients.forEach(function(ingredient) {
+[...listIngredients].forEach(function(ing) {
 
-      ingredient.addEventListener('click', elegirIng);
-   
+  ing.addEventListener("click", function() {
+      seleccionarIngrediente(ing.innerText);
+    });
+  });
+
   
- });
+pedido.addEventListener("click", function() {
+    mostrarSeleccion();
+  });
 
-let arrayIngredient =["Tomate","Albahaca","Mozzarella","Peperoni","Champiñon","Jamon","Pollo Parrilla","Jamon","Bacon Crispy","Anchoas","Aceitunas","Cebolla","Pimiento","Piña","atun"];
-
- function elegirIng(){
-  
+limpiar.addEventListener("click", () =>{
+    selectIng = [];
+    ingredientes.innerHTML = "";
     
-    for(let i=0;i<listIngredients.length; i++){
-        alert(listIngredients[i].textContent)
+});
+
+function seleccionarIngrediente(ingr) {
+  if (!selectIng.includes(ingr)) {
+    selectIng.push(ingr);
+    alert(`Ha seleccionado ${ingr}.`);
+  } else {
+    alert(`Ya ha seleccionado ${ingr}.`);
+  }
+}
+
+function mostrarSeleccion() {
+  ingredientes.innerHTML = "";
+  if (selectIng.length === 0) {
+    ingredientes.innerHTML = "No ha seleccionado ningún ingrediente.";
+  } else {
+    for (let i = 0; i < selectIng.length; i++) {
+    ingredientes.innerHTML=`Ha seleccionado: ${selectIng.join(", ")}.`
     }
- }
- function imprimirIng(){
-    
- }
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
